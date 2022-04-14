@@ -1,2 +1,3 @@
-# All-The-Right-Words
-All The Right Words Game
+# All The Right Words Project
+
+- Java
