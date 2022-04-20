@@ -11,7 +11,7 @@ import java.awt.event.*;
 
 public class RightWordsAggarwal{
 
-  // ---- Attributes ----
+  /**----------Attributes----------*/
   private JFrame gameFrame, instructionsFrame;
   private JPanel bckMain, bckSide, bpTop, bpBot, buttonLetterPanel, buttonExtrasPanel,
                  textPanel, scorePanel, wordsPanel, bckIs, headerPanel, isPanel;
@@ -22,9 +22,9 @@ public class RightWordsAggarwal{
   private Font scoreFont, letterFont, extrasFont, wordsFont, isFont;
   private Color darkGreen, lightGreen, darkText;
 
-  // ---- Methods ----
+  /**----------Methods----------*/
 
-  /** constructor */
+  /**----------Constructor----------*/
   public RightWordsAggarwal(){
 
     // initializing colors
@@ -195,7 +195,7 @@ public class RightWordsAggarwal{
 
       // Ref: https://stackoverflow.com/questions/15513380/how-to-open-a-new-window-by-clicking-a-button
       /* I wanted to open the instructions frame side by side with the game frame
-      This code gets the position of the game fram, and uses it to position the instructions frame */
+      This code gets the position of the game frame, and uses it to position the instructions frame */
       Point gfLocation = gameFrame.getLocation();
 
     instructionsFrame = new JFrame("Instructions");
@@ -212,7 +212,7 @@ public class RightWordsAggarwal{
 
   }
 
-  /** main method */
+  /**----------Main Method----------*/
   public static void main(String[] args) {
     new RightWordsAggarwal();
   }
