@@ -17,7 +17,7 @@ public class RightWordsAggarwal{
                  textPanel, scorePanel, wordsPanel;
   private JButton[] letters = new JButton[7];
   private JButton finish, clearText, instructions, submit;
-  private JLabel scoreLabel, wordsLabel, words, headerLabel;
+  private JLabel scoreLabel, wordsHeaderLabel, wordsContentLabel;
   private JTextField output;
   private Font scoreFont, letterButtonsFont, extraButtonsFont, guessedWordsFont;
   private Color darkGreen, lightGreen, darkText;
@@ -72,16 +72,16 @@ public class RightWordsAggarwal{
     scoreLabel = new JLabel("Score:", JLabel.CENTER);
       scoreLabel.setFont(scoreFont);
       scoreLabel.setForeground(darkText);
-    wordsLabel = new JLabel("Previous Words:", JLabel.CENTER);
-      wordsLabel.setFont(extraButtonsFont);
-      wordsLabel.setForeground(darkText);
+    wordsHeaderLabel = new JLabel("Previous Words:", JLabel.CENTER);
+      wordsHeaderLabel.setFont(extraButtonsFont);
+      wordsHeaderLabel.setForeground(darkText);
       // Ref: https://docs.oracle.com/javase/7/docs/api/javax/swing/BorderFactory.html#createEmptyBorder(int,%20int,%20int,%20int)
       /* This code creates an empty border that acts sort of like padding
       It lets me have more control over the positioning of panels */
-      wordsLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-    words = new JLabel("<html><center></center><html>", JLabel.CENTER);
-      words.setFont(guessedWordsFont);
-      words.setForeground(darkText);
+      wordsHeaderLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    wordsContentLabel = new JLabel("<html><center></center><html>", JLabel.CENTER);
+      wordsContentLabel.setFont(guessedWordsFont);
+      wordsContentLabel.setForeground(darkText);
 
     // Initialize Panels
     textPanel = new JPanel();
@@ -131,8 +131,8 @@ public class RightWordsAggarwal{
       wordsPanel.setBackground(lightGreen);
       wordsPanel.setPreferredSize(new Dimension(200, 300));
       wordsPanel.setLayout(new BorderLayout());
-      wordsPanel.add(wordsLabel, BorderLayout.NORTH);
-      wordsPanel.add(words, BorderLayout.CENTER);
+      wordsPanel.add(wordsHeaderLabel, BorderLayout.NORTH);
+      wordsPanel.add(wordsContentLabel, BorderLayout.CENTER);
       wordsPanel.add(finish, BorderLayout.SOUTH);
 
     // Initialize Structural Panels (used for layout)
