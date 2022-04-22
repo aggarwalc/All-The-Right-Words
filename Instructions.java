@@ -12,7 +12,7 @@ import java.awt.event.*;
 public class Instructions{
 
   /**----------Attributes----------*/
-  public static JFrame frame;
+  private static JFrame frame;
   private JPanel isBckPanel, isHeaderPanel, isContentPanel;
   private JLabel isHeaderLabel, isContentLabel;
   private Font isHeaderFont;
