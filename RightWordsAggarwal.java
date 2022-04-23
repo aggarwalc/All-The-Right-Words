@@ -1,9 +1,12 @@
 /**
   * RightWordsAggarwal.java
   * @author Chirag Aggarwal
-  * @description Right Words Game GUI
-  * @version 1.0 2022-03-19
+  * @description All The Right Words Game GUI
+  * @version 2.0 2022-04-22
 */
+
+// ***NOTES***
+// *****GAME FILE*****
 
 import java.awt.*;
 import javax.swing.*;
@@ -15,13 +18,15 @@ public class RightWordsAggarwal{
   private static JFrame frame;
   private JPanel bckMainPanel, bckSidePanel, ButtonTopPanel, ButtonBottomPanel, buttonLetterPanel, buttonExtrasPanel,
                  textPanel, scorePanel, wordsPanel;
-  private JButton[] letters = new JButton[7];
+  private JButton[] letterButtons = new JButton[7];
   private JButton finish, clearText, instructions, submit;
   private JLabel scoreLabel, wordsHeaderLabel, wordsContentLabel;
   private JTextField output;
   private Font scoreFont, letterButtonsFont, extraButtonsFont, guessedWordsFont;
   private Color darkGreen, lightGreen, darkText;
   private Response userActivity = new Response();
+  private Content content = new Content();
+  private String[] letters = content.getLetters();
 
   /**----------Methods----------*/
 
@@ -39,8 +44,8 @@ public class RightWordsAggarwal{
     darkText = new Color(57, 65, 60);
     // Initialize Fonts
     scoreFont = new Font("Courier", Font.BOLD, 30);
-    extraButtonsFont = new Font("Courier", Font.BOLD, 18);
-    guessedWordsFont = new Font("Courier", Font.PLAIN, 17);
+    extraButtonsFont = new Font("Courier", Font.BOLD, 19);
+    guessedWordsFont = new Font("Courier", Font.PLAIN, 19);
     letterButtonsFont = new Font("Courier", Font.BOLD, 45);
   }
 
@@ -54,10 +59,12 @@ public class RightWordsAggarwal{
     finish = new JButton("Finish");
       finish.setFont(extraButtonsFont);
       finish.setForeground(darkText);
+      finish.addActionListener(userActivity);
     clearText = new JButton("Clear");
       clearText.setFont(extraButtonsFont);
       clearText.setForeground(darkText);
       clearText.setPreferredSize(new Dimension(175, 30));
+      clearText.addActionListener(userActivity);
     instructions = new JButton("Instructions");
       instructions.setFont(extraButtonsFont);
       instructions.setForeground(darkText);
@@ -67,9 +74,10 @@ public class RightWordsAggarwal{
       submit.setFont(extraButtonsFont);
       submit.setForeground(darkText);
       submit.setPreferredSize(new Dimension(175, 30));
+      submit.addActionListener(userActivity);
 
     // Initialize Labels
-    scoreLabel = new JLabel("Score:", JLabel.CENTER);
+    scoreLabel = new JLabel("Score: 0", JLabel.CENTER);
       scoreLabel.setFont(scoreFont);
       scoreLabel.setForeground(darkText);
     wordsHeaderLabel = new JLabel("Previous Words:", JLabel.CENTER);
@@ -79,7 +87,7 @@ public class RightWordsAggarwal{
       /* This code creates an empty border that acts sort of like padding
       It lets me have more control over the positioning of panels */
       wordsHeaderLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-    wordsContentLabel = new JLabel("<html><center></center><html>", JLabel.CENTER);
+    wordsContentLabel = new JLabel("", JLabel.CENTER);
       wordsContentLabel.setFont(guessedWordsFont);
       wordsContentLabel.setForeground(darkText);
 
@@ -94,22 +102,24 @@ public class RightWordsAggarwal{
       ButtonTopPanel.setBackground(darkGreen);
       // Initialize Letter Buttons
       for (int i=0; i < 4; i++){
-        letters[i] = new JButton("L" + i);
-        letters[i].setPreferredSize(new Dimension(105, 110));
-        letters[i].setForeground(darkGreen);
-        letters[i].setFont(letterButtonsFont);
-        ButtonTopPanel.add(letters[i]);
+        letterButtons[i] = new JButton(letters[i]);
+        letterButtons[i].setPreferredSize(new Dimension(105, 110));
+        letterButtons[i].setForeground(darkGreen);
+        letterButtons[i].setFont(letterButtonsFont);
+        letterButtons[i].addActionListener(userActivity);
+        ButtonTopPanel.add(letterButtons[i]);
       }
     ButtonBottomPanel = new JPanel();
       ButtonBottomPanel.setLayout(new GridBagLayout());
       ButtonBottomPanel.setBackground(darkGreen);
       // Initialize Letter Buttons
       for (int i=4; i < 7; i++){
-        letters[i] = new JButton("L" + i);
-        letters[i].setPreferredSize(new Dimension(105, 110));
-        letters[i].setForeground(darkGreen);
-        letters[i].setFont(letterButtonsFont);
-        ButtonBottomPanel.add(letters[i]);
+        letterButtons[i] = new JButton(letters[i]);
+        letterButtons[i].setPreferredSize(new Dimension(105, 110));
+        letterButtons[i].setForeground(darkGreen);
+        letterButtons[i].setFont(letterButtonsFont);
+        letterButtons[i].addActionListener(userActivity);
+        ButtonBottomPanel.add(letterButtons[i]);
       }
     buttonLetterPanel = new JPanel();
       buttonLetterPanel.setBackground(lightGreen);
@@ -132,7 +142,7 @@ public class RightWordsAggarwal{
       wordsPanel.setPreferredSize(new Dimension(200, 300));
       wordsPanel.setLayout(new BorderLayout());
       wordsPanel.add(wordsHeaderLabel, BorderLayout.NORTH);
-      wordsPanel.add(wordsContentLabel, BorderLayout.CENTER);
+      wordsPanel.add(wordsContentLabel);
       wordsPanel.add(finish, BorderLayout.SOUTH);
 
     // Initialize Structural Panels (used for layout)
@@ -178,8 +188,32 @@ public class RightWordsAggarwal{
   private class Response implements ActionListener{
 
     public void actionPerformed(ActionEvent press){
+      // Instructions Button
       if (press.getSource() == instructions){
         Instructions.setVisible();
+      }
+      // Clear Button
+      else if (press.getSource() == clearText){
+        output.setText(content.clearOutput());
+      }
+      // Submit Button
+      else if (press.getSource() == submit){
+        wordsContentLabel.setText(content.updateWords());
+        output.setText(content.clearOutput());
+        scoreLabel.setText(content.getScoreText());
+      }
+      // Finish Button
+      else if (press.getSource() == finish){
+        output.setText(content.clearOutput());
+        wordsContentLabel.setText(content.clearWords());
+        scoreLabel.setText(content.clearScore());
+      }
+      else{
+        for (int i = 0; i < 7; i++){
+          if (press.getSource() == letterButtons[i]){
+            output.setText(content.updateOutput(letters[i]));
+          }
+        }
       }
     }
   } // end of nested Action Listener Class
