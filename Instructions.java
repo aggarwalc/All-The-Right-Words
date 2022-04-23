@@ -2,8 +2,11 @@
   * Instructions.java
   * @author Chirag Aggarwal
   * @description Instructions GUI
-  * @version 1.0 2022-04-22
+  * @version 2.0 2022-04-22
 */
+
+// ***NOTES***
+// *****ADD INSTRUCTIONS*****
 
 import java.awt.*;
 import javax.swing.*;
