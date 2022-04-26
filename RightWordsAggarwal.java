@@ -6,7 +6,7 @@
 */
 
 // ***NOTES***
-// *****GAME FILE*****
+//
 
 import java.awt.*;
 import javax.swing.*;
@@ -37,18 +37,20 @@ public class RightWordsAggarwal{
     setFrame();
   }
 
+  // Set Game Frame Fonts and Colors
   public void setFontsAndColors(){
     // Initialize Colors
     darkGreen = new Color(132, 169, 140);
     lightGreen = new Color(202, 210, 197);
     darkText = new Color(57, 65, 60);
     // Initialize Fonts
-    scoreFont = new Font("Courier", Font.BOLD, 30);
+    scoreFont = new Font("Courier", Font.BOLD, 25);
     extraButtonsFont = new Font("Courier", Font.BOLD, 19);
     guessedWordsFont = new Font("Courier", Font.PLAIN, 19);
     letterButtonsFont = new Font("Courier", Font.BOLD, 45);
   }
 
+  // Set Game Frame Panels
   public void setPanels(){
     // Initialize TextField
     output = new JTextField();
@@ -164,6 +166,7 @@ public class RightWordsAggarwal{
       bckSidePanel.add(wordsPanel, BorderLayout.SOUTH);
   }
 
+  // Set Game Frame
   public void setFrame(){
     frame = new JFrame("All the Right Words");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -176,6 +179,7 @@ public class RightWordsAggarwal{
     new Instructions();
   }
 
+  // Get the location of the Game Frame
   public static Point getLocation(){
     // Ref: https://stackoverflow.com/questions/15513380/how-to-open-a-new-window-by-clicking-a-button
     /* I wanted to open the instructions frame side by side with the game frame
@@ -207,7 +211,14 @@ public class RightWordsAggarwal{
         output.setText(content.clearOutput());
         wordsContentLabel.setText(content.clearWords());
         scoreLabel.setText(content.clearScore());
+
+        // Initialize new Buttons
+        letters = content.getLetters();
+        for (int i=0; i < 7; i++){
+          letterButtons[i].setText(letters[i]);
+        }
       }
+      // Letter Buttons
       else{
         for (int i = 0; i < 7; i++){
           if (press.getSource() == letterButtons[i]){
