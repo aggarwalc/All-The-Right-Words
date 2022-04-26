@@ -6,7 +6,7 @@
 */
 
 // ***NOTES***
-// 
+//
 
 import java.awt.*;
 import javax.swing.*;
@@ -113,4 +113,4 @@ public class Instructions{
   public static void main(String[] args) {
     new Instructions();
   }
-} // end of Instructions Class
+} // End of Instructions Class
